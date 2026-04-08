@@ -7,6 +7,7 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { overflow: hidden; background: #111; height: 100vh; cursor: none; }
+
     .segment {
       position: absolute;
       width: 16px;
@@ -16,14 +17,16 @@
       box-shadow: 0 0 10px lime;
       pointer-events: none;
     }
+
     .food {
       position: absolute;
-      width: 16px;
-      height: 16px;
+      width: 10px; /* reduced size */
+      height: 10px; /* reduced size */
       background: red;
       border-radius: 50%;
-      box-shadow: 0 0 10px red;
+      box-shadow: 0 0 8px red; /* smaller glow for smaller food */
     }
+
     h1 {
       position: absolute;
       top: 20px;
@@ -33,6 +36,7 @@
       font-family: Arial, sans-serif;
       z-index: 10;
     }
+
     #score {
       position: absolute;
       top: 60px;
@@ -60,8 +64,8 @@
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
 
-    let foodX = Math.random() * (window.innerWidth - 20);
-    let foodY = Math.random() * (window.innerHeight - 20);
+    let foodX = Math.random() * (window.innerWidth - 10);
+    let foodY = Math.random() * (window.innerHeight - 10);
 
     food.style.left = foodX + "px";
     food.style.top = foodY + "px";
@@ -86,15 +90,15 @@
       const dy = positions[0].y - foodY;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      if (distance < 20) {
+      if (distance < 15) { // adjusted for smaller food
         snakeLength += 3;
         score++;
         scoreBox.innerText = "Score: " + score;
 
         for (let i = 0; i < 3; i++) createSegment();
 
-        foodX = Math.random() * (window.innerWidth - 20);
-        foodY = Math.random() * (window.innerHeight - 20);
+        foodX = Math.random() * (window.innerWidth - 10);
+        foodY = Math.random() * (window.innerHeight - 10);
         food.style.left = foodX + "px";
         food.style.top = foodY + "px";
       }
